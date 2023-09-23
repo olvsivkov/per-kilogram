@@ -2,6 +2,17 @@
 var resultPerKilo = document.querySelector(".result-per-kilo");
 var BTNSubmit = document.querySelector(".BTNSubmit");
 var form = document.querySelector('form');
+// type guard function
+function isNaNFormValue() {
+    var inputValueAmount = form === null || form === void 0 ? void 0 : form.num_amount.value;
+    var inputValueWeight = form === null || form === void 0 ? void 0 : form.num_weight.value;
+    if (inputValueWeight === "" || inputValueAmount === "" || isNaN(Number(inputValueAmount || inputValueWeight))) {
+        return "not a number";
+    }
+    else if (inputValueWeight === "0" || inputValueAmount === "0") {
+        return "not a number";
+    }
+}
 // calculate functions
 var valueObject = {
     numAmount: 0,
@@ -12,11 +23,11 @@ function getValueFromForm() {
         valueObject.numWeight = form === null || form === void 0 ? void 0 : form.num_weight.value;
 }
 function calcToOneHundredGrams() {
-    var valueToOneGram = valueObject.numAmount / valueObject.numWeight;
+    var valueToOneGram = Number(valueObject.numAmount / valueObject.numWeight) * 100;
     return +valueToOneGram.toFixed(2);
 }
 function calcToOneThousandGrams() {
-    var valueToThousandGram = (valueObject.numAmount / valueObject.numWeight) * 1000;
+    var valueToThousandGram = Number(valueObject.numAmount / valueObject.numWeight) * 1000;
     return +valueToThousandGram.toFixed(2);
 }
 // create info element after calculate values
@@ -30,8 +41,14 @@ function createElem(amount, weight) {
     return div;
 }
 function submitForm() {
-    getValueFromForm();
-    resultPerKilo === null || resultPerKilo === void 0 ? void 0 : resultPerKilo.append(createElem(calcToOneHundredGrams(), calcToOneThousandGrams()));
-    //numAmount.value = null
+    if (isNaNFormValue() && "not a number") {
+        console.log("No div");
+        return;
+    }
+    else {
+        getValueFromForm();
+        resultPerKilo === null || resultPerKilo === void 0 ? void 0 : resultPerKilo.append(createElem(calcToOneHundredGrams(), calcToOneThousandGrams()));
+        //numAmount.value = null
+    }
 }
 BTNSubmit === null || BTNSubmit === void 0 ? void 0 : BTNSubmit.addEventListener('click', submitForm);

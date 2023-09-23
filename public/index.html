@@ -8,11 +8,11 @@
 </head>
 <body>
   <div id="app">
-    <form>
+    <form novalidate>
       <label for="num_amount">цена</label>
-      <input type="text" id="num_amount" name="num_amount">
+      <input type="number" id="num_amount" name="num_amount" placeholder="введите число" numbersOnly>
       <label for="num_weight">вес</label>
-      <input type="text" id="num_weight" name="num_weight">
+      <input type="number" id="num_weight" name="num_weight" placeholder="введите число" numbersOnly>
       <button type="button" class="BTNSubmit">Go</button>
       <div class="listOfCalculation"></div>
     </form>
