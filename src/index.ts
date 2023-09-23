@@ -1,6 +1,6 @@
 const resultPerKilo = document.querySelector(".result-per-kilo")
 const BTNSubmit = document.querySelector(".BTNSubmit")
-const form = document.querySelector('form');
+const form: HTMLFormElement | null = document.querySelector('form');
 
 interface IvalueFromForm {
   numAmount: number,
@@ -10,34 +10,38 @@ interface IvalueFromForm {
 // type guard function
 
 function isNaNFormValue(): string | undefined{
-  const inputValueAmount: string = form?.num_amount.value;
-  const inputValueWeight: string = form?.num_weight.value;
-  if (inputValueWeight === ""|| inputValueAmount === "" || isNaN(Number(inputValueAmount|| inputValueWeight))) {
-    return "not a number"
+  const inputValueAmount: string = form?.num_amount.value.trim();
+  const inputValueWeight: string = form?.num_weight.value.trim();
+  if(inputValueAmount === "" || inputValueAmount === "0" || isNaN(Number(inputValueAmount))) {
+    if(form !== null) form.num_amount.classList.add("invalid"); // !!!!!!!!!!!!! В css сделать рамку
+    // !!!!!!!! дописать popup
+    return "not a number";
   }
-  else if(inputValueWeight === "0" || inputValueAmount === "0") { 
-    return "not a number" 
+  if(inputValueWeight === "" || inputValueWeight === "0" || isNaN(Number(inputValueWeight))) {
+    if(form !== null) form.num_weight.classList.add("invalid");
+    // !!!!!!!! дописать popup
+    return "not a number";
   }
 }
 
 // calculate functions
 
-const valueObject: IvalueFromForm = {
+const valuesFromForm: IvalueFromForm = {
   numAmount: 0,
   numWeight: 0
 }
 
 function getValueFromForm():void {
-  valueObject.numAmount = form?.num_amount.value,
-  valueObject.numWeight = form?.num_weight.value; 
+  valuesFromForm.numAmount = form?.num_amount.value,
+  valuesFromForm.numWeight = form?.num_weight.value; 
 }
 function calcToOneHundredGrams(): number {
-  const valueToOneGram: number = Number(valueObject.numAmount/valueObject.numWeight) * 100
+  const valueToOneGram: number = Number(valuesFromForm.numAmount/valuesFromForm.numWeight) * 100
   return +valueToOneGram.toFixed(2) 
 }
 
 function calcToOneThousandGrams(): number  {
-  const valueToThousandGram: number = Number(valueObject.numAmount/valueObject.numWeight) * 1000
+  const valueToThousandGram: number = Number(valuesFromForm.numAmount/valuesFromForm.numWeight) * 1000
   return +valueToThousandGram.toFixed(2) 
 }
 
@@ -60,7 +64,7 @@ function submitForm(): void {
   else {
     getValueFromForm()
     resultPerKilo?.append(createElem(calcToOneHundredGrams(),calcToOneThousandGrams()))
-    //numAmount.value = null
+    form?.reset();
   }
 }
 

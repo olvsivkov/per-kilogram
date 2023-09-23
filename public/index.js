@@ -4,30 +4,36 @@ var BTNSubmit = document.querySelector(".BTNSubmit");
 var form = document.querySelector('form');
 // type guard function
 function isNaNFormValue() {
-    var inputValueAmount = form === null || form === void 0 ? void 0 : form.num_amount.value;
-    var inputValueWeight = form === null || form === void 0 ? void 0 : form.num_weight.value;
-    if (inputValueWeight === "" || inputValueAmount === "" || isNaN(Number(inputValueAmount || inputValueWeight))) {
+    var inputValueAmount = form === null || form === void 0 ? void 0 : form.num_amount.value.trim();
+    var inputValueWeight = form === null || form === void 0 ? void 0 : form.num_weight.value.trim();
+    if (inputValueAmount === "" || inputValueAmount === "0" || isNaN(Number(inputValueAmount))) {
+        if (form !== null)
+            form.num_amount.classList.add("invalid"); // !!!!!!!!!!!!! В css сделать рамку
+        // !!!!!!!! дописать popup
         return "not a number";
     }
-    else if (inputValueWeight === "0" || inputValueAmount === "0") {
+    if (inputValueWeight === "" || inputValueWeight === "0" || isNaN(Number(inputValueWeight))) {
+        if (form !== null)
+            form.num_weight.classList.add("invalid");
+        // !!!!!!!! дописать popup
         return "not a number";
     }
 }
 // calculate functions
-var valueObject = {
+var valuesFromForm = {
     numAmount: 0,
     numWeight: 0
 };
 function getValueFromForm() {
-    valueObject.numAmount = form === null || form === void 0 ? void 0 : form.num_amount.value,
-        valueObject.numWeight = form === null || form === void 0 ? void 0 : form.num_weight.value;
+    valuesFromForm.numAmount = form === null || form === void 0 ? void 0 : form.num_amount.value,
+        valuesFromForm.numWeight = form === null || form === void 0 ? void 0 : form.num_weight.value;
 }
 function calcToOneHundredGrams() {
-    var valueToOneGram = Number(valueObject.numAmount / valueObject.numWeight) * 100;
+    var valueToOneGram = Number(valuesFromForm.numAmount / valuesFromForm.numWeight) * 100;
     return +valueToOneGram.toFixed(2);
 }
 function calcToOneThousandGrams() {
-    var valueToThousandGram = Number(valueObject.numAmount / valueObject.numWeight) * 1000;
+    var valueToThousandGram = Number(valuesFromForm.numAmount / valuesFromForm.numWeight) * 1000;
     return +valueToThousandGram.toFixed(2);
 }
 // create info element after calculate values
@@ -48,7 +54,7 @@ function submitForm() {
     else {
         getValueFromForm();
         resultPerKilo === null || resultPerKilo === void 0 ? void 0 : resultPerKilo.append(createElem(calcToOneHundredGrams(), calcToOneThousandGrams()));
-        //numAmount.value = null
+        form === null || form === void 0 ? void 0 : form.reset();
     }
 }
 BTNSubmit === null || BTNSubmit === void 0 ? void 0 : BTNSubmit.addEventListener('click', submitForm);
