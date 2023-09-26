@@ -2,6 +2,9 @@
 var resultPerKilo = document.querySelector(".result-per-kilo");
 var BTNSubmit = document.querySelector(".BTNSubmit");
 var form = document.querySelector('form');
+var toLocalStorage = document.querySelector('.result-per-kilo');
+var BTNLoalStorageClear = document.querySelector('.BTNLoalStorageClear');
+var resultPerKiloElem = document.querySelector('.result-per-kilo');
 // type guard function
 function isNaNFormValue() {
     var inputValueAmount = form === null || form === void 0 ? void 0 : form.num_amount.value.trim();
@@ -19,7 +22,6 @@ function isNaNFormValue() {
         return "not a number";
     }
 }
-// calculate functions
 var valuesFromForm = {
     numAmount: 0,
     numWeight: 0
@@ -40,6 +42,7 @@ function calcToOneThousandGrams() {
 function createElem(amount, weight) {
     var _a;
     var div = document.createElement('div');
+    div.classList.add("new-div-item");
     div.innerHTML = "<p>\u0446\u0435\u043D\u0430 \u0437\u0430 100 \u0433\u0440 ".concat(amount, " \u0440. \u0426\u0435\u043D\u0430 \u0437\u0430 1 \u043A\u0433 ").concat(weight, " \u0440.</p><button>Close</button>");
     (_a = div.querySelector('button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
         div.remove();
@@ -53,8 +56,44 @@ function submitForm() {
     }
     else {
         getValueFromForm();
-        resultPerKilo === null || resultPerKilo === void 0 ? void 0 : resultPerKilo.append(createElem(calcToOneHundredGrams(), calcToOneThousandGrams()));
+        var newCalculateElem = createElem(calcToOneHundredGrams(), calcToOneThousandGrams());
+        resultPerKilo === null || resultPerKilo === void 0 ? void 0 : resultPerKilo.append(newCalculateElem);
+        putDataToLocalstorage();
         form === null || form === void 0 ? void 0 : form.reset();
     }
 }
+// put data in localstorage
+function putDataToLocalstorage() {
+    var divsWithCalculate = toLocalStorage === null || toLocalStorage === void 0 ? void 0 : toLocalStorage.outerHTML.toString();
+    if (typeof divsWithCalculate === "string") {
+        localStorage.setItem('items', divsWithCalculate);
+    }
+}
+window.onload = function () {
+    var savedData = localStorage.getItem('items');
+    if (savedData) {
+        var divElem = document.createElement('div');
+        divElem.classList.add('new-div-item');
+        divElem.innerHTML = savedData;
+        resultPerKiloElem === null || resultPerKiloElem === void 0 ? void 0 : resultPerKiloElem.append(divElem);
+    }
+    else {
+        console.log('No data in localStorage');
+    }
+    var removeDivItem = function (event) {
+        if (event.target.tagName === 'BUTTON') {
+            var divItemElem = event.target.closest('.new-div-item');
+            if (divItemElem) {
+                divItemElem.remove();
+                localStorage.clear();
+                putDataToLocalstorage();
+            }
+        }
+    };
+    resultPerKiloElem === null || resultPerKiloElem === void 0 ? void 0 : resultPerKiloElem.addEventListener('click', removeDivItem);
+};
+BTNLoalStorageClear === null || BTNLoalStorageClear === void 0 ? void 0 : BTNLoalStorageClear.addEventListener('click', function () {
+    window.localStorage.clear();
+    resultPerKiloElem === null || resultPerKiloElem === void 0 ? void 0 : resultPerKiloElem.remove();
+});
 BTNSubmit === null || BTNSubmit === void 0 ? void 0 : BTNSubmit.addEventListener('click', submitForm);
