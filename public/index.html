@@ -8,13 +8,19 @@
 </head>
 <body>
   <div id="app">
-    <form novalidate>
-      <label for="num_amount">цена</label>
-      <input type="text" id="num_amount" name="num_amount" placeholder="введите число" numbersOnly>
-      <label for="num_weight">вес</label>
-      <input type="text" id="num_weight" name="num_weight" placeholder="введите число" numbersOnly>
-      <button type="button" class="BTNSubmit">Go</button>
-      <button type="button" class="BTNLoalStorageClear">Clear all</button>
+    <form novalidate class="form">
+      <div class="block-in-form">
+        <label for="num_amount">цена</label>
+        <input type="text" id="num_amount" name="num_amount" class="number-field" placeholder="введите число" numbersOnly>
+      </div>
+      <div class="block-in-form">
+        <label for="num_weight">вес</label>
+        <input type="text" id="num_weight" name="num_weight" class="number-field" placeholder="введите число" numbersOnly>
+      </div>
+      <div class="buttons block-in-form">
+        <button type="button" class="BTNSubmit">Go</button>
+        <button type="button" class="BTNLoalStorageClear">Clear all</button>
+      </div>
       <div class="listOfCalculation"></div>
     </form>
     <section class="section-style-for-divs">

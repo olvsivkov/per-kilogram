@@ -110,7 +110,7 @@ resultPerKiloElem?.addEventListener('click', removeDivItem);
 
 BTNLoalStorageClear?.addEventListener('click', () => {
   window.localStorage.clear();
-  resultPerKiloElem?.remove();
+  location.reload();
 })
 
 BTNSubmit?.addEventListener('click', submitForm)

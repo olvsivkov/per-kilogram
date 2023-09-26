@@ -94,6 +94,6 @@ window.onload = function () {
 };
 BTNLoalStorageClear === null || BTNLoalStorageClear === void 0 ? void 0 : BTNLoalStorageClear.addEventListener('click', function () {
     window.localStorage.clear();
-    resultPerKiloElem === null || resultPerKiloElem === void 0 ? void 0 : resultPerKiloElem.remove();
+    location.reload();
 });
 BTNSubmit === null || BTNSubmit === void 0 ? void 0 : BTNSubmit.addEventListener('click', submitForm);
