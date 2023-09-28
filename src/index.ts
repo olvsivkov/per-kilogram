@@ -53,7 +53,7 @@ function calcToOneThousandGrams(): number  {
 function createElem(amount:number, weight:number): HTMLDivElement {
   const div: HTMLDivElement = document.createElement('div');
   div.classList.add("new-div-item")
-  div.innerHTML = `<p>100 гр = ${amount} &#x20bd.</p> <p> 1 кг = ${weight} &#x20bd.</p><p class="close-symbol">&#10005;</p>`;
+  div.innerHTML = `<div class="inner-div-item"><p>100 гр = ${amount} &#x20bd.</p> <p> 1 кг = ${weight} &#x20bd.</p><p class="close-symbol">&#10005;</p></div>`;
   div.querySelector('button')?.addEventListener('click', () => {
     div.remove();
   });
@@ -94,8 +94,6 @@ window.onload = () => {
   } else {
     console.log('No data in localStorage');
   }
-
-  //const divItemElem = event.target.closest('.new-div-item');
 
   const removeDivItem = (event: any): void => {
     if (event.target.classList.contains('close-symbol')) {

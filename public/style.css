@@ -100,7 +100,7 @@ body {
   background-color: #750505e3;
 }
 
-.new-div-item {
+.inner-div-item {
   background-color: #ced0d785;
   color: #2B3442;
   padding: 2%;
@@ -110,7 +110,7 @@ body {
   grid-template-columns: 3fr 3fr 1fr;
 }
 
-.new-div-item > p{
+.inner-div-item > p{
   text-align: center;
 }
 
