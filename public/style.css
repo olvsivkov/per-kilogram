@@ -14,8 +14,9 @@ body {
 }
 
 #app {
-  width: 100%;
+  width: 80%;
   padding: 0 24px;
+  margin: auto;
 }
 
 @media (min-width: 767px) {
@@ -56,7 +57,7 @@ body {
 
 .number-field {
   padding: 0 10px;
-  height: 60px;
+  height: 40px;
   border: 1px solid rgb(226, 223, 223);
   border-radius: 15px;
   color:#2B3442;
@@ -64,5 +65,60 @@ body {
   line-height: 1.5;
   cursor: pointer;
   background-color: #FFF;;
+}
 
+.buttons {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1%;
+}
+
+.buttons>button{
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  color: #FFF;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+
+}
+
+.BTNSubmit{
+  background-color: #69d254;
+}
+
+.BTNSubmit:active{
+  background-color: #3d7a30;
+}
+
+.BTNLoalStorageClear{
+  background-color: #ce0909e3;
+}
+
+.BTNLoalStorageClear:active{
+  background-color: #750505e3;
+}
+
+.new-div-item {
+  background-color: #ced0d785;
+  color: #2B3442;
+  padding: 2%;
+  margin: 1%;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+}
+
+.new-div-item > p{
+  text-align: center;
+}
+
+.close-symbol {
+  color: red;
+  cursor: pointer;
+}
+
+.close-symbol:active {
+  color: rgb(117, 1, 1);
 }

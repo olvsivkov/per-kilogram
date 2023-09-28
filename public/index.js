@@ -43,7 +43,7 @@ function createElem(amount, weight) {
     var _a;
     var div = document.createElement('div');
     div.classList.add("new-div-item");
-    div.innerHTML = "<p>\u0446\u0435\u043D\u0430 \u0437\u0430 100 \u0433\u0440 ".concat(amount, " \u0440. \u0426\u0435\u043D\u0430 \u0437\u0430 1 \u043A\u0433 ").concat(weight, " \u0440.</p><button>Close</button>");
+    div.innerHTML = "<p>100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p><p class=\"close-symbol\">&#10005;</p>");
     (_a = div.querySelector('button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
         div.remove();
     });
@@ -80,8 +80,9 @@ window.onload = function () {
     else {
         console.log('No data in localStorage');
     }
+    //const divItemElem = event.target.closest('.new-div-item');
     var removeDivItem = function (event) {
-        if (event.target.tagName === 'BUTTON') {
+        if (event.target.classList.contains('close-symbol')) {
             var divItemElem = event.target.closest('.new-div-item');
             if (divItemElem) {
                 divItemElem.remove();
