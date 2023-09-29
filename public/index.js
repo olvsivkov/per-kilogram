@@ -43,7 +43,7 @@ function createElem(amount, weight) {
     var _a;
     var div = document.createElement('div');
     div.classList.add("new-div-item");
-    div.innerHTML = "<div class=\"inner-div-item\"><p>100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p><p class=\"close-symbol\">&#10005;</p></div>");
+    div.innerHTML = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p>100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p></div><div class=\"close-symbol\">&#10005;</div></div>");
     (_a = div.querySelector('button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
         div.remove();
     });

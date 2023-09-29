@@ -11,6 +11,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #F6F8FF;
+  font-size: 3vw;
+}
+
+@media (max-width: 600px) {
+  body{
+    font-size: 15px;
+  }
 }
 
 #app {
@@ -19,9 +26,17 @@ body {
   margin: auto;
 }
 
-@media (min-width: 767px) {
+@media (max-width: 767px) {
   #app {
-    width: 734px;
+    width: 90%;
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 500px) {
+  #app {
+    width: 98%;
     padding: 0;
     margin: 0 auto;
   }
@@ -106,11 +121,32 @@ body {
   padding: 2%;
   margin: 1%;
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: 3fr 3fr 1fr;
+  align-items: center;
 }
 
-.inner-div-item > p{
+@media (max-width: 460px) {
+  .value-wrapper{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+  }
+  .inner-div-item{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 461px) {
+  .value-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .inner-div-item{
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+  }
+}
+
+.inner-div-item > p,:last-child{
   text-align: center;
 }
 

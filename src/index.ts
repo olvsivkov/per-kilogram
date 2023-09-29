@@ -53,7 +53,7 @@ function calcToOneThousandGrams(): number  {
 function createElem(amount:number, weight:number): HTMLDivElement {
   const div: HTMLDivElement = document.createElement('div');
   div.classList.add("new-div-item")
-  div.innerHTML = `<div class="inner-div-item"><p>100 гр = ${amount} &#x20bd.</p> <p> 1 кг = ${weight} &#x20bd.</p><p class="close-symbol">&#10005;</p></div>`;
+  div.innerHTML = `<div class="inner-div-item"><div class="value-wrapper"><p>100 гр = ${amount} &#x20bd.</p> <p> 1 кг = ${weight} &#x20bd.</p></div><div class="close-symbol">&#10005;</div></div>`;
   div.querySelector('button')?.addEventListener('click', () => {
     div.remove();
   });
