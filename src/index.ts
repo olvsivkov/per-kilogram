@@ -2,9 +2,10 @@ const resultPerKilo = document.querySelector(".result-per-kilo")
 const BTNSubmit = document.querySelector(".BTNSubmit")
 const form: HTMLFormElement | null = document.querySelector('form');
 const toLocalStorage = document.querySelector('.result-per-kilo')
-const BTNLoalStorageClear = document.querySelector('.BTNLoalStorageClear')
+const BTNLocalStorageClear = document.querySelector('.BTNLocalStorageClear')
 const resultPerKiloElem = document.querySelector('.result-per-kilo');
-
+const switchTheme = document.querySelector('.switch-theme')
+let isDarkTheme = false
 // type guard function
 
 function isNaNFormValue(): string | undefined{
@@ -51,9 +52,13 @@ function calcToOneThousandGrams(): number  {
 // create info element after calculate values
 
 function createElem(amount:number, weight:number): HTMLDivElement {
+
+  const lightTheme = `<div class="inner-div-item"><div class="value-wrapper"><p>100 гр = ${amount} &#x20bd.</p> <p> 1 кг = ${weight} &#x20bd.</p></div><div class="close-symbol">&#10005;</div></div>`;
+
+  const darkTheme = `<div class="inner-div-item"><div class="value-wrapper"><p class="app-switcher">100 гр = ${amount} &#x20bd.</p> <p class="app-switcher"> 1 кг = ${weight} &#x20bd.</p></div><div class="close-symbol">&#10005;</div></div>`;
   const div: HTMLDivElement = document.createElement('div');
-  div.classList.add("new-div-item")
-  div.innerHTML = `<div class="inner-div-item"><div class="value-wrapper"><p>100 гр = ${amount} &#x20bd.</p> <p> 1 кг = ${weight} &#x20bd.</p></div><div class="close-symbol">&#10005;</div></div>`;
+  div.classList.add("new-div-item");
+  div.innerHTML = isDarkTheme ? darkTheme : lightTheme;
   div.querySelector('button')?.addEventListener('click', () => {
     div.remove();
   });
@@ -95,6 +100,8 @@ window.onload = () => {
     console.log('No data in localStorage');
   }
 
+  checkDarkThemeAfterReload()
+
   const removeDivItem = (event: any): void => {
     if (event.target.classList.contains('close-symbol')) {
       const divItemElem = event.target.closest('.new-div-item');
@@ -108,12 +115,54 @@ window.onload = () => {
 resultPerKiloElem?.addEventListener('click', removeDivItem);
 }
 
-BTNLoalStorageClear?.addEventListener('click', () => {
+BTNLocalStorageClear?.addEventListener('click', () => {
   window.localStorage.clear();
   location.reload();
 })
 
 BTNSubmit?.addEventListener('click', submitForm)
 
+// switch color theme
+
+switchTheme?.addEventListener('click', switchThemeStyle)
+
+function checkDarkThemeAfterReload() {
+  const darkThemeStatus = localStorage.getItem('darkThemeStatus')
+  if(darkThemeStatus === 'darkThemeTrue') switchThemeStyle()
+}
+
+function switchThemeStyle(): void {
+  const body = document.querySelector('body')
+  const app = document.getElementById('app')
+  const blockInForm = document.querySelectorAll('.block-fields')
+  const paragraph = document.querySelectorAll('p')
+  const changeImg = document.querySelector('.switch-theme')
+
+  body?.classList.toggle('body-switcher')
+  app?.classList.toggle('app-switcher')
+  paragraph?.forEach(elem => elem.classList.toggle('app-switcher'))
+  blockInForm?.forEach(elem => { 
+    elem.classList.toggle('block-in-form-switcher')
+    elem.classList.toggle('app-switcher')
+  })
+
+  if(body?.classList.contains('body-switcher'))  {
+    isDarkTheme = true;
+    if(changeImg !== null) {
+    changeImg.innerHTML = `
+      <span>Light</span>
+      <img src="./assets/icon-sun.svg" alt="sun icon">
+    `}
+    localStorage.setItem('darkThemeStatus', "darkThemeTrue");
+   }else { 
+    isDarkTheme = false;
+    if(changeImg !== null) {
+    changeImg.innerHTML = `
+      <span>Dark</span>
+      <img src="./assets/icon-moon.svg" alt="moon icon">
+    `}
+    localStorage.removeItem('darkThemeStatus');
+   }
+}
 
 

@@ -11,7 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #F6F8FF;
-  font-size: 3vw;
+  font-size: 2vw;
 }
 
 @media (max-width: 600px) {
@@ -40,6 +40,22 @@ body {
     padding: 0;
     margin: 0 auto;
   }
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.header>div {
+  padding: 10px 10px 10px 30px;
+}
+
+.app-title {
+  text-align: left;
+  font-size: 1.75rem;
+  line-height: 1.5;
+  font-weight: 700;
 }
 
 .block-in-form{
@@ -107,11 +123,11 @@ body {
   background-color: #3d7a30;
 }
 
-.BTNLoalStorageClear{
+.BTNLocalStorageClear{
   background-color: #ce0909e3;
 }
 
-.BTNLoalStorageClear:active{
+.BTNLocalStorageClear:active{
   background-color: #750505e3;
 }
 
@@ -157,4 +173,25 @@ body {
 
 .close-symbol:active {
   color: rgb(117, 1, 1);
+}
+
+/* --- swith theme --- */
+
+.body-switcher{
+  background-color: #141D2F;
+}
+
+.app-switcher{
+  color: rgb(241, 234, 234);
+}
+
+.block-in-form-switcher {
+  background-color: #2B3442;
+}
+
+.switch-theme {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer
 }

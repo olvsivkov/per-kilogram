@@ -3,8 +3,10 @@ var resultPerKilo = document.querySelector(".result-per-kilo");
 var BTNSubmit = document.querySelector(".BTNSubmit");
 var form = document.querySelector('form');
 var toLocalStorage = document.querySelector('.result-per-kilo');
-var BTNLoalStorageClear = document.querySelector('.BTNLoalStorageClear');
+var BTNLocalStorageClear = document.querySelector('.BTNLocalStorageClear');
 var resultPerKiloElem = document.querySelector('.result-per-kilo');
+var switchTheme = document.querySelector('.switch-theme');
+var isDarkTheme = false;
 // type guard function
 function isNaNFormValue() {
     var inputValueAmount = form === null || form === void 0 ? void 0 : form.num_amount.value.trim();
@@ -41,9 +43,11 @@ function calcToOneThousandGrams() {
 // create info element after calculate values
 function createElem(amount, weight) {
     var _a;
+    var lightTheme = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p>100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p></div><div class=\"close-symbol\">&#10005;</div></div>");
+    var darkTheme = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p class=\"app-switcher\">100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p class=\"app-switcher\"> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p></div><div class=\"close-symbol\">&#10005;</div></div>");
     var div = document.createElement('div');
     div.classList.add("new-div-item");
-    div.innerHTML = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p>100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p></div><div class=\"close-symbol\">&#10005;</div></div>");
+    div.innerHTML = isDarkTheme ? darkTheme : lightTheme;
     (_a = div.querySelector('button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () {
         div.remove();
     });
@@ -80,6 +84,7 @@ window.onload = function () {
     else {
         console.log('No data in localStorage');
     }
+    checkDarkThemeAfterReload();
     var removeDivItem = function (event) {
         if (event.target.classList.contains('close-symbol')) {
             var divItemElem = event.target.closest('.new-div-item');
@@ -92,8 +97,43 @@ window.onload = function () {
     };
     resultPerKiloElem === null || resultPerKiloElem === void 0 ? void 0 : resultPerKiloElem.addEventListener('click', removeDivItem);
 };
-BTNLoalStorageClear === null || BTNLoalStorageClear === void 0 ? void 0 : BTNLoalStorageClear.addEventListener('click', function () {
+BTNLocalStorageClear === null || BTNLocalStorageClear === void 0 ? void 0 : BTNLocalStorageClear.addEventListener('click', function () {
     window.localStorage.clear();
     location.reload();
 });
 BTNSubmit === null || BTNSubmit === void 0 ? void 0 : BTNSubmit.addEventListener('click', submitForm);
+// switch color theme
+switchTheme === null || switchTheme === void 0 ? void 0 : switchTheme.addEventListener('click', switchThemeStyle);
+function checkDarkThemeAfterReload() {
+    var darkThemeStatus = localStorage.getItem('darkThemeStatus');
+    if (darkThemeStatus === 'darkThemeTrue')
+        switchThemeStyle();
+}
+function switchThemeStyle() {
+    var body = document.querySelector('body');
+    var app = document.getElementById('app');
+    var blockInForm = document.querySelectorAll('.block-fields');
+    var paragraph = document.querySelectorAll('p');
+    var changeImg = document.querySelector('.switch-theme');
+    body === null || body === void 0 ? void 0 : body.classList.toggle('body-switcher');
+    app === null || app === void 0 ? void 0 : app.classList.toggle('app-switcher');
+    paragraph === null || paragraph === void 0 ? void 0 : paragraph.forEach(function (elem) { return elem.classList.toggle('app-switcher'); });
+    blockInForm === null || blockInForm === void 0 ? void 0 : blockInForm.forEach(function (elem) {
+        elem.classList.toggle('block-in-form-switcher');
+        elem.classList.toggle('app-switcher');
+    });
+    if (body === null || body === void 0 ? void 0 : body.classList.contains('body-switcher')) {
+        isDarkTheme = true;
+        if (changeImg !== null) {
+            changeImg.innerHTML = "\n      <span>Light</span>\n      <img src=\"./assets/icon-sun.svg\" alt=\"sun icon\">\n    ";
+        }
+        localStorage.setItem('darkThemeStatus', "darkThemeTrue");
+    }
+    else {
+        isDarkTheme = false;
+        if (changeImg !== null) {
+            changeImg.innerHTML = "\n      <span>Dark</span>\n      <img src=\"./assets/icon-moon.svg\" alt=\"moon icon\">\n    ";
+        }
+        localStorage.removeItem('darkThemeStatus');
+    }
+}
