@@ -17,7 +17,7 @@ function validateForm(): string | undefined{
     if(form !== null) form.num_amount.classList.add("invalid"); 
     return "not a number";
   }
-  if(!inputValueAmount || isNaN(Number(inputValueWeight))) {
+  if(!inputValueWeight || isNaN(Number(inputValueWeight))) {
     if(form !== null) form.num_weight.classList.add("invalid");
     return "not a number";
   }
@@ -34,16 +34,16 @@ function borderWhenFormNotEmpty(){
 function showPopUp() {
   const popupElement = document.getElementById('popup') as HTMLElement;
     popupElement.style.display = 'block';
-      setTimeout(function() {
-        popupElement.style.display = 'none';
-      }, 2000);
+    setTimeout(function() {
+      popupElement.style.display = 'none';
+    }, 2000);
 
 }
 
-form?.addEventListener('focus', function(event: FocusEvent) {
+/*form?.addEventListener('focus', function(event: FocusEvent) {
   const targetElement = event.target as HTMLElement; 
   targetElement?.classList.remove("invalid");
-});
+});*/
 
 // calculate functions
 
