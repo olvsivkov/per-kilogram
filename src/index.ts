@@ -5,23 +5,45 @@ const toLocalStorage = document.querySelector('.result-per-kilo')
 const BTNLocalStorageClear = document.querySelector('.BTNLocalStorageClear')
 const resultPerKiloElem = document.querySelector('.result-per-kilo');
 const switchTheme = document.querySelector('.switch-theme')
+const numberFields = document.querySelectorAll('.number-field')
 let isDarkTheme = false
+
 // type guard function
 
-function isNaNFormValue(): string | undefined{
+function validateForm(): string | undefined{
   const inputValueAmount: string = form?.num_amount.value.trim();
   const inputValueWeight: string = form?.num_weight.value.trim();
-  if(inputValueAmount === "" || inputValueAmount === "0" || isNaN(Number(inputValueAmount))) {
-    if(form !== null) form.num_amount.classList.add("invalid"); // !!!!!!!!!!!!! В css сделать рамку
-    // !!!!!!!! дописать popup
+  if(!inputValueAmount || isNaN(Number(inputValueAmount))) {
+    if(form !== null) form.num_amount.classList.add("invalid"); 
     return "not a number";
   }
-  if(inputValueWeight === "" || inputValueWeight === "0" || isNaN(Number(inputValueWeight))) {
+  if(!inputValueAmount || isNaN(Number(inputValueWeight))) {
     if(form !== null) form.num_weight.classList.add("invalid");
-    // !!!!!!!! дописать popup
+    return "not a number";
+  }
+  if( +inputValueAmount < 1 || +inputValueWeight < 1){
+    showPopUp()
     return "not a number";
   }
 }
+
+function borderWhenFormNotEmpty(){
+  numberFields.forEach( elem => elem.classList.remove("invalid") )
+}
+
+function showPopUp() {
+  const popupElement = document.getElementById('popup') as HTMLElement;
+    popupElement.style.display = 'block';
+      setTimeout(function() {
+        popupElement.style.display = 'none';
+      }, 2000);
+
+}
+
+form?.addEventListener('focus', function(event: FocusEvent) {
+  const targetElement = event.target as HTMLElement; 
+  targetElement?.classList.remove("invalid");
+});
 
 // calculate functions
 
@@ -66,11 +88,12 @@ function createElem(amount:number, weight:number): HTMLDivElement {
 }
 
 function submitForm(): void {
-  if(isNaNFormValue() && "not a number") {
+  if(validateForm() && "not a number") {
     console.log("No div")
     return
   }
   else {
+    borderWhenFormNotEmpty();
     getValueFromForm()
     const newCalculateElem = createElem(calcToOneHundredGrams(),calcToOneThousandGrams())
     resultPerKilo?.append(newCalculateElem);

@@ -6,24 +6,41 @@ var toLocalStorage = document.querySelector('.result-per-kilo');
 var BTNLocalStorageClear = document.querySelector('.BTNLocalStorageClear');
 var resultPerKiloElem = document.querySelector('.result-per-kilo');
 var switchTheme = document.querySelector('.switch-theme');
+var numberFields = document.querySelectorAll('.number-field');
 var isDarkTheme = false;
 // type guard function
-function isNaNFormValue() {
+function validateForm() {
     var inputValueAmount = form === null || form === void 0 ? void 0 : form.num_amount.value.trim();
     var inputValueWeight = form === null || form === void 0 ? void 0 : form.num_weight.value.trim();
-    if (inputValueAmount === "" || inputValueAmount === "0" || isNaN(Number(inputValueAmount))) {
+    if (!inputValueAmount || isNaN(Number(inputValueAmount))) {
         if (form !== null)
-            form.num_amount.classList.add("invalid"); // !!!!!!!!!!!!! В css сделать рамку
-        // !!!!!!!! дописать popup
+            form.num_amount.classList.add("invalid");
         return "not a number";
     }
-    if (inputValueWeight === "" || inputValueWeight === "0" || isNaN(Number(inputValueWeight))) {
+    if (!inputValueAmount || isNaN(Number(inputValueWeight))) {
         if (form !== null)
             form.num_weight.classList.add("invalid");
-        // !!!!!!!! дописать popup
+        return "not a number";
+    }
+    if (+inputValueAmount < 1 || +inputValueWeight < 1) {
+        showPopUp();
         return "not a number";
     }
 }
+function borderWhenFormNotEmpty() {
+    numberFields.forEach(function (elem) { return elem.classList.remove("invalid"); });
+}
+function showPopUp() {
+    var popupElement = document.getElementById('popup');
+    popupElement.style.display = 'block';
+    setTimeout(function () {
+        popupElement.style.display = 'none';
+    }, 2000);
+}
+form === null || form === void 0 ? void 0 : form.addEventListener('focus', function (event) {
+    var targetElement = event.target;
+    targetElement === null || targetElement === void 0 ? void 0 : targetElement.classList.remove("invalid");
+});
 var valuesFromForm = {
     numAmount: 0,
     numWeight: 0
@@ -54,11 +71,12 @@ function createElem(amount, weight) {
     return div;
 }
 function submitForm() {
-    if (isNaNFormValue() && "not a number") {
+    if (validateForm() && "not a number") {
         console.log("No div");
         return;
     }
     else {
+        borderWhenFormNotEmpty();
         getValueFromForm();
         var newCalculateElem = createElem(calcToOneHundredGrams(), calcToOneThousandGrams());
         resultPerKilo === null || resultPerKilo === void 0 ? void 0 : resultPerKilo.append(newCalculateElem);
