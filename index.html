@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Per killogram</title>
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <div class="app-title">Цена за кг</div>
+      <div class="switch-theme">
+        <span>Dark</span>
+        <img src="./assets/icon-moon.svg" alt="moon icon">
+      </div>
+    </div>
+    <form novalidate class="form">
+      <div class="block-in-form block-fields">
+        <label for="num_amount">цена в &#x20bd</label>
+        <input type="text" id="num_amount" name="num_amount" class="number-field block-fields" placeholder="введите стоимость товара" numbersOnly autocomplete="off">
+      </div>
+      <div class="block-in-form block-fields">
+        <label for="num_weight">вес в гр.</label>
+        <input type="text" id="num_weight" name="num_weight" class="number-field block-fields" placeholder="введите вес товара в граммах" numbersOnly autocomplete="off">
+      </div>
+      <div class="buttons block-in-form block-fields">
+        <button type="button" class="BTNSubmit">Считать</button>
+        <button type="button" class="BTNLocalStorageClear">Очистить</button>
+      </div>
+      <div class="listOfCalculation"></div>
+    </form>
+    <div id="popup" class="popup" style="display: none;">
+      <p>число должно быть больше 0</p>
+    </div>
+    <section class="section-style-for-divs">
+      <div class="result-per-kilo"></div>
+    </section>
+  </div>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>
