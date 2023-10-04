@@ -6,8 +6,8 @@
   "scripts": {
     "start": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predeploy": "npm run build",
-	  "deploy": "gh-pages -d build"
+    "predeploy": "tsc",
+    "deploy": "gh-pages -d public"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +19,5 @@
   "dependencies": {
     "normalize.css": "^8.0.1"
   },
-  "homepage": "https://olvsivkov.github.io/per-kilogram/public"
+  "homepage": "https://olvsivkov.github.io/per-kilogram/"
 }
