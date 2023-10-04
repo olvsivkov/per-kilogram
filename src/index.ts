@@ -40,11 +40,6 @@ function showPopUp() {
 
 }
 
-/*form?.addEventListener('focus', function(event: FocusEvent) {
-  const targetElement = event.target as HTMLElement; 
-  targetElement?.classList.remove("invalid");
-});*/
-
 // calculate functions
 
   interface IvalueFromForm {
