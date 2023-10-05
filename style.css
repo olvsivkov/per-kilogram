@@ -22,7 +22,7 @@ body {
 
 @media (max-width: 600px) {
   body{
-    font-size: 15px;
+    font-size: 23px;
   }
 }
 
@@ -71,7 +71,7 @@ body {
   padding: 10px 10px 10px 16px;
   background-color: white;
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 4fr 5fr;
   align-items: center;
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);;
   border-radius: 15px;
@@ -119,7 +119,13 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   cursor: pointer;
+}
 
+
+@media (max-width: 767px) {
+  .buttons>button{
+    font-size: 23px;
+  }
 }
 
 .BTNSubmit{
@@ -154,7 +160,7 @@ body {
   }
   .inner-div-item{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
   }
 }
 
@@ -191,7 +197,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: #ced0d7;
   padding: 20px;
   border: 1px solid #000;
   border-radius: 15px;
