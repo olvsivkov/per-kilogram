@@ -56,8 +56,8 @@ function calcToOneThousandGrams() {
 // create info element after calculate values
 function createElem(amount, weight) {
     var _a;
-    var lightTheme = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p>100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p></div><div class=\"close-symbol\">&#10005;</div></div>");
-    var darkTheme = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p class=\"app-switcher\">100 \u0433\u0440 = ".concat(amount, " &#x20bd.</p> <p class=\"app-switcher\"> 1 \u043A\u0433 = ").concat(weight, " &#x20bd.</p></div><div class=\"close-symbol\">&#10005;</div></div>");
+    var lightTheme = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p>100 \u0433\u0440 = ".concat(amount, " \u0440\u0443\u0431 </p> <p> 1 \u043A\u0433 = ").concat(weight, " \u0440\u0443\u0431</p></div><div class=\"close-symbol\">&#10005;</div></div>");
+    var darkTheme = "<div class=\"inner-div-item\"><div class=\"value-wrapper\"><p class=\"app-switcher\">100 \u0433\u0440 = ".concat(amount, " \u0440\u0443\u0431</p> <p class=\"app-switcher\"> \u0437\u0430 1 \u043A\u0433 = ").concat(weight, "\u0440\u0443\u0431 </p></div><div class=\"close-symbol\">&#10005;</div></div>");
     var div = document.createElement('div');
     div.classList.add("new-div-item");
     div.innerHTML = isDarkTheme ? darkTheme : lightTheme;
