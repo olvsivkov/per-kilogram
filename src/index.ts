@@ -134,7 +134,7 @@ resultPerKiloElem?.addEventListener('click', removeDivItem);
 }
 
 BTNLocalStorageClear?.addEventListener('click', () => {
-  window.localStorage.clear();
+  localStorage.removeItem('items');
   location.reload();
 })
 
