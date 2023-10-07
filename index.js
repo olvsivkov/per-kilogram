@@ -112,7 +112,7 @@ window.onload = function () {
     resultPerKiloElem === null || resultPerKiloElem === void 0 ? void 0 : resultPerKiloElem.addEventListener('click', removeDivItem);
 };
 BTNLocalStorageClear === null || BTNLocalStorageClear === void 0 ? void 0 : BTNLocalStorageClear.addEventListener('click', function () {
-    window.localStorage.clear();
+    localStorage.removeItem('items');
     location.reload();
 });
 BTNSubmit === null || BTNSubmit === void 0 ? void 0 : BTNSubmit.addEventListener('click', submitForm);
